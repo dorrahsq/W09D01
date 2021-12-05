@@ -6,7 +6,6 @@ import { BsFillArrowRightCircleFill } from "react-icons/bs";
 
 const Login = () => {
   let navigate = useNavigate();
-  const [users, setusers] = useState([]);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
@@ -16,20 +15,16 @@ const Login = () => {
       `${process.env.REACT_APP_BASE_URL}/user/log`,
       { email, password }
     );
-    setusers(users.data);
-    console.log(users.data.result.role);
+
     localStorage.setItem("role", users.data.result.role);
     localStorage.setItem("token", users.data.token);
+    localStorage.setItem("userID", users.data.result._id);
     navigate(`/`);
     window.location.reload(false);
   };
 
   return (
     <>
-      {/* <img
-        className="videoBG"
-        src="https://images.pexels.com/photos/4397899/pexels-photo-4397899.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-      /> */}
       <div className="describeItem">
         <span className="Logg">Log in </span>
         <input

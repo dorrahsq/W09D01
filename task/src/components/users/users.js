@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
 import axios from "axios";
 
 const Users = () => {
+  let navigate = useNavigate();
   const [allUsers, setAllUsers] = useState([]);
   const [token, setToken] = useState("");
 
@@ -33,13 +36,23 @@ const Users = () => {
     getAllUsers();
   };
 
+  const goInside = (id) => {
+    navigate(`/user/${id}`);
+  };
+
   return (
     <>
       {allUsers.length &&
         allUsers.map((ele) => {
           return (
             <>
-              <h3>{ele.email}</h3>
+              <h3
+                onClick={() => {
+                  goInside(ele._id);
+                }}
+              >
+                {ele.email}
+              </h3>
               <button onClick={() => deleteUser(ele._id)}> delete </button>
             </>
           );

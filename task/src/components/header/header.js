@@ -1,19 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./style.css";
-import { BsHeartFill } from "react-icons/bs";
 import { AiOutlineLogout } from "react-icons/ai";
-import { SiGooglephotos } from "react-icons/si";
+
 const Header = () => {
+  const [role, setRole] = useState(localStorage.getItem("role"));
   let navigate = useNavigate();
 
   const logOut = () => {
     navigate(`/`);
     localStorage.clear();
-    window.location.reload(false); //changgge
+    window.location.reload(false);
     console.log("log out");
   };
-  let role = localStorage.getItem("role");
 
   return (
     <>
@@ -25,7 +24,7 @@ const Header = () => {
             </Link>
           </li>
           {role == "61a4e135a6502019b9898c1e" && (
-            <li id="myPro" className="lie">
+            <li className="lie">
               <Link className="link" to="/usres">
                 users
               </Link>

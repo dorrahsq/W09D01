@@ -6,13 +6,13 @@ import Header from "./components/header/header";
 import SignUp from "./components/signup/signup";
 import Home from "./components/home/home";
 import Users from "./components/users/users";
+import OneUser from "./components/oneuser/oneuser";
 
 function App() {
   let userId = localStorage.getItem("token");
 
   return (
     <>
-      <h1> hello </h1>
       {userId ? (
         <>
           <Header />
@@ -20,6 +20,7 @@ function App() {
           <Routes>
             <Route exact path="/" element={<Home />} />
             <Route exact path="/usres" element={<Users />} />
+            <Route exact path="/user/:id" element={<OneUser />} />
           </Routes>
         </>
       ) : (

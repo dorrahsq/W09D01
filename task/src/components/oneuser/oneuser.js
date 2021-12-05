@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import "./style.css";
 import { RiPencilFill } from "react-icons/ri";
 
-const Home = () => {
+const OneUser = () => {
+  const id = useParams().id;
   const [allTasks, setAllTasks] = useState([]);
   const [token, setToken] = useState("");
   const [newTask, setNewTask] = useState("");
@@ -15,12 +16,10 @@ const Home = () => {
 
   const getAllTask = async () => {
     let tokenn = localStorage.getItem("token");
-    let userID = localStorage.getItem("userID");
-
     setToken(tokenn);
     const tasks = await axios.post(
       `${process.env.REACT_APP_BASE_URL}/task/`,
-      { reqUserId: userID },
+      { reqUserId: id },
       {
         headers: {
           Authorization: `Bearer ${tokenn}`,
@@ -28,9 +27,11 @@ const Home = () => {
       }
     );
     setAllTasks(tasks.data);
+    console.log(tasks);
   };
 
   const deleteTask = async (taskId) => {
+    console.log(taskId);
     await axios.put(
       `${process.env.REACT_APP_BASE_URL}/task/delete`,
       { _id: taskId },
@@ -46,7 +47,7 @@ const Home = () => {
   const addTask = async () => {
     await axios.post(
       `${process.env.REACT_APP_BASE_URL}/task/create`,
-      { user: localStorage.getItem("userID"), name: newTask },
+      { user: id, name: newTask },
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -72,7 +73,7 @@ const Home = () => {
 
   return (
     <div className="home">
-      <input 
+      <input
         type="text"
         placeholder="new task"
         onChange={(e) => {
@@ -82,7 +83,7 @@ const Home = () => {
       <button onClick={addTask}> add </button>
 
       {!allTasks.length ? (
-        <h2> you dont have any tasks</h2>
+        <h2> this user dose not have any tasks</h2>
       ) : (
         <div className="anim">
           {allTasks.map((ele) => {
@@ -116,4 +117,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default OneUser;
