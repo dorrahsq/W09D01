@@ -24,11 +24,11 @@ Todo-List made In React and Node.js/Express with CRUD Functionality
 - Complete/Incomplete task
 
 
-### UML diagrm:
+## UML diagrm:
 ![Untitled Diagram drawio-3](https://user-images.githubusercontent.com/92247950/145245703-c2fdb9ac-edea-4815-8ee9-096951e30184.png)
 
 
-### Routes
+## Routes
 Component     |     Path      |  Permissions
 ------------- | -----------   | ------------
 Login         | `/`           | everyone
